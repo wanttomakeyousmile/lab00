@@ -276,8 +276,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -286,14 +292,74 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -310,23 +376,23 @@ $(document).ready(function () {
 </div>
 
 
-<section id="overview" class="level3">
+<div id="overview" class="section level3">
 <h3>Overview</h3>
 <p>Within this lab, we’ll be taking a look at how to write RMarkdown in addition to the appropriate structure for relative and absolute paths. In particular, we’ll focus on how to link to an image file and read in a sample data set.</p>
-<section id="markdown-formatting" class="level4">
+<div id="markdown-formatting" class="section level4">
 <h4>Markdown Formatting</h4>
-<section id="styling" class="level5">
+<div id="styling" class="section level5">
 <h5>Styling</h5>
 <p>Write an unordered list of your classes this semester.</p>
-<ol type="1">
+<ol style="list-style-type: decimal">
 <li>When writing the short course name (e.g. STAT 385) make it bold.</li>
 <li>Create a link so that when the short course name is clicked it will take you to the course description in the course explorer.</li>
 <li>Make the long title (Statistics Programming Methods) italic.</li>
 </ol>
 <p>If you need help with syntax, go to the “Help” menu and select the <em>Markdown Quick Reference</em> guide. This will open in the <strong>Help</strong> tab on the <em>lower-right</em> corner of <em>RStudio</em>.</p>
 <p>The course explorer is found here: <a href="https://courses.illinois.edu/schedule/2018/spring/STAT" class="uri">https://courses.illinois.edu/schedule/2018/spring/STAT</a></p>
-</section>
-<section id="making-r-code-work" class="level5">
+</div>
+<div id="making-r-code-work" class="section level5">
 <h5>Making <em>R</em> Code Work</h5>
 <p>The following <em>R</em> code will error when the document is first knit:</p>
 <pre class="r"><code># install.packages(&quot;ggplot2&quot;)
@@ -335,7 +401,7 @@ ggplot(mtcars, aes(wt, mpg)) +
 <p>The error is:</p>
 <pre class="r"><code>Error in ggplot(mtcars, aes(wt, mpg)) : could not find function &quot;ggplot&quot;</code></pre>
 <p>Fix the code chunk by:</p>
-<ol type="1">
+<ol style="list-style-type: decimal">
 <li>Installing the <code>ggplot2</code> if it isn’t already installed
 <ul>
 <li>Please uncomment, e.g. delete <code>#</code>, to install and then recomment the code, e.g. add <code>#</code> back.</li>
@@ -343,8 +409,8 @@ ggplot(mtcars, aes(wt, mpg)) +
 <li>Load the package <code>ggplot2</code> using the <code>library()</code> function.</li>
 <li>Make the code chunk <em>dynamic</em>.</li>
 </ol>
-</section>
-<section id="mathematics" class="level5">
+</div>
+<div id="mathematics" class="section level5">
 <h5>Mathematics</h5>
 <p><strong>A helpful resource for looking up mathematical symbols can be found at: <a href="https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols" class="uri">https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols</a></strong></p>
 <p><strong>Welcome to LaTeX</strong></p>
@@ -363,36 +429,36 @@ ggplot(mtcars, aes(wt, mpg)) +
 <ul>
 <li>Plus or Minus symbol is given by: <code>\pm</code></li>
 </ul>
-</section>
-<section id="tables" class="level5">
+</div>
+<div id="tables" class="section level5">
 <h5>Tables</h5>
 <p>Recreate the following data table in markdown:</p>
 <table>
 <thead>
 <tr class="header">
 <th></th>
-<th style="text-align: right;">HIV-</th>
-<th style="text-align: right;">HIV+</th>
+<th align="right">HIV-</th>
+<th align="right">HIV+</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Male</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">37</td>
+<td align="right">12</td>
+<td align="right">37</td>
 </tr>
 <tr class="even">
 <td>Female</td>
-<td style="text-align: right;">50</td>
-<td style="text-align: right;">9</td>
+<td align="right">50</td>
+<td align="right">9</td>
 </tr>
 </tbody>
 </table>
-</section>
-</section>
-<section id="paths" class="level4">
+</div>
+</div>
+<div id="paths" class="section level4">
 <h4>Paths</h4>
-<section id="relative-paths" class="level5">
+<div id="relative-paths" class="section level5">
 <h5>Relative Paths</h5>
 <p>Relative paths are based on where the current working directory is pointing to. They lack any reference to the “root” of the file system.</p>
 <pre class="md"><code>![File is in the same directory as RMarkdown document](block-i.png)
@@ -402,8 +468,8 @@ ggplot(mtcars, aes(wt, mpg)) +
 <p>The working directory is displayed immediately underneath the <em>R</em> <strong>Console</strong> tab in the lower-left corner of <em>RStudio</em>.</p>
 <p>To figure out the working directory of this document type:</p>
 <pre class="r"><code>getwd()</code></pre>
-<pre><code>## [1] &quot;/Volumes/[C] My Boot Camp.hidden/Users/balamut2/Documents/rmarkdown-examples&quot;</code></pre>
-<section id="goal" class="level6">
+<pre><code>## [1] &quot;/cloud/project/rmarkdown-examples&quot;</code></pre>
+<div id="goal" class="section level6">
 <h6>Goal:</h6>
 <p>Write <em>relative</em> paths for:</p>
 <ul>
@@ -411,9 +477,9 @@ ggplot(mtcars, aes(wt, mpg)) +
 <li><code>r-logo.png</code></li>
 <li><code>cloud-data.csv</code></li>
 </ul>
-</section>
-</section>
-<section id="absolute-or-fixed-paths" class="level5">
+</div>
+</div>
+<div id="absolute-or-fixed-paths" class="section level5">
 <h5>Absolute or Fixed Paths</h5>
 <p>Absolute or fixed paths are based on the relation of the file to the “root” of the file system. These paths are traditional very long and cause code used on two different computers to break.</p>
 <pre class="md"><code>![MacOS Absolute Path](/Users/jjb/rmarkdown-examples/block-i.png)
@@ -421,7 +487,7 @@ ggplot(mtcars, aes(wt, mpg)) +
 ![Linux Absolute Path](/home/parallel/rmarkdown-examples/block-i.png)
 ![RStudio Cloud Absolute Path](/home/rstudio-user/rmarkdown-examples/block-i.png)</code></pre>
 <p>Do not use these types of file paths in your <em>RMarkdown</em> file! This will cause us to be unable to recreate your output or results document.</p>
-<section id="goal-1" class="level6">
+<div id="goal-1" class="section level6">
 <h6>Goal:</h6>
 <p>Write <em>absolute</em> paths for <em>Windows</em>, <em>MacOS</em>, and <em>Linux</em>:</p>
 <ul>
@@ -430,10 +496,10 @@ ggplot(mtcars, aes(wt, mpg)) +
 <li><code>cloud-data.csv</code></li>
 </ul>
 <p>Hint: Open the file location in your file explorer or type <code>getwd()</code> to get the base of the directory.</p>
-</section>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
+</div>
 
 
 
